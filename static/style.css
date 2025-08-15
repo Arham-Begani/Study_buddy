@@ -7,3 +7,10 @@
 *{
     box-sizing:border-box;
 }
+
+body{
+    margin:0;
+    background:var(--bg);
+    font-family:Poppins,system-ui,Arial;
+    color:var(--text);
+}
