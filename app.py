@@ -134,3 +134,18 @@ def schedule():
 @app.route("/chat", methods=["GET"])
 def chat_page():
     return render_template("chat.html")
+
+@app.route("/api/chat", methods=["POST"])
+def chat_api():
+    data = request.json or {}
+    
+    question = data.get("message", "").strip()
+    
+    style = data.get("style", "simple")
+    
+    if not question:
+        return jsonify({"reply": "ask a question"}), 400
+    
+    prompt = f"Explain in style={style}. Question: {question}"
+    reply = ai_complete(prompt)
+    return jsonify({"reply": reply})
