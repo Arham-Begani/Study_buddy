@@ -22,6 +22,20 @@ if USE_GEMINI:
 
 app = Flask(__name__)
 
+def ai_complete(prompt: str) -> str:
+    """Use Gemini if available, otherwise deterministic offline fallback."""
+    
+    if USE_GEMINI:
+        try:
+            resp = GEM_MODEL.generate_content(prompt)
+            return (resp.text or "").strip() or "(empty AI response)"
+        except Exception as e:
+            return f"(AI error: {e})"
+    
+    
+    
+
 @app.route("/")
 def home():
     return render_template("index.html")
+
