@@ -125,3 +125,18 @@ button:hover {
     gap: 12px;
     margin-top: 12px;
 }
+
+.btn {
+    display: block;
+    text-align: center;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: #fff;
+    text-decoration: none;
+    color: #111;
+}
+
+.btn:hover {
+    background: #f9fafb;
+}
