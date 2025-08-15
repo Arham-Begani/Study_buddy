@@ -67,3 +67,12 @@ main{
          opacity: 1; transform: translateY(0); 
     }
 }
+
+h1,h2,h3{
+    margin:0 0 12px 0
+}
+
+p{
+    color:var(--muted);
+    margin:0 0 16px 0;
+}
