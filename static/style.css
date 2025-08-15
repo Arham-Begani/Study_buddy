@@ -147,3 +147,9 @@ button:hover {
     gap: 10px;
     margin-top: 12px;
 }
+
+.day {
+    border: 1px dashed var(--border);
+    border-radius: 10px;
+    padding: 10px;
+}
