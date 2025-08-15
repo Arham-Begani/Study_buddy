@@ -21,3 +21,7 @@ if USE_GEMINI:
     GEM_MODEL = genai.GenerativeModel("gemini-1.5-flash")
 
 app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return render_template("index.html")
