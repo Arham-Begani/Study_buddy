@@ -170,3 +170,10 @@ def quiz():
             "2) Unit of force?\nA) Joule  B) Newton  C) Watt  D) Pascal\nAnswer: B",
             "3) H2O common name?\nA) Oxygen  B) Hydrogen  C) Water  D) Helium\nAnswer: C",
         ])
+        
+    return render_template("quiz.html", generated=text, topic=topic, count=count, level=level)
+
+if __name__ == "__main__":
+    
+    port = int(os.environ.get("PORT", "5000"))
+    app.run(host="0.0.0.0", port=port, debug=True)
