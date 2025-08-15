@@ -86,7 +86,7 @@ def schedule():
         t2_start = t1_end
         t2_end = time_add(t2_start, per_subject_block)
 
-    schedule_plan.append({
+        schedule_plan.append({
             "day": d,
             "slots": [
                 {"subject": s1, "start": t1_start, "end": t1_end},
