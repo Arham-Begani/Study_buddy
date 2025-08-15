@@ -130,3 +130,7 @@ def schedule():
     return render_template("schedule.html", plan=schedule_plan, summary=summary,
                            hours=hours_per_day, days=days, start_time=start_time,
                            subjects_text=",".join(subjects))
+    
+@app.route("/chat", methods=["GET"])
+def chat_page():
+    return render_template("chat.html")
