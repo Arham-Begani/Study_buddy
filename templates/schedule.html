@@ -6,6 +6,21 @@
     <label>Subjects (comma separated)</label>
     <input name="subjects" value="{{ subjects_text or '' }}" placeholder="Physics, Math, Chemistry, Biology, Social">
 
+    <div class="row">
+      <div>
+        <label>Hours per day</label>
+        <input type="number" step="0.5" name="hours" value="{{ hours or 3 }}">
+      </div>
+      <div>
+        <label>Days</label>
+        <input type="number" name="days" value="{{ days or 14 }}">
+      </div>
+      <div>
+        <label>Start time (HH:MM)</label> 
+        <input name="start_time" value="{{ start_time or '17:00' }}">
+      </div>
+    </div>
+
     
 
   {% if plan %}
