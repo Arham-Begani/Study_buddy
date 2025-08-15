@@ -22,6 +22,7 @@ if USE_GEMINI:
 
 app = Flask(__name__)
 
+
 def ai_complete(prompt: str) -> str:
     """Use Gemini if available, otherwise deterministic offline fallback."""
     
@@ -40,9 +41,14 @@ def ai_complete(prompt: str) -> str:
         return "1) Q: Define inertia. A: Resistance to change in motion.\n2) Q: State Ohm’s law. A: V=IR."
     return "offline mode: no API key set; add details and try again."
 
+def chunk_list(xs, n):
+    return [xs[i:i+n] for i in range(0, len(xs), n)]
+
+
 @app.route("/")
 def home():
     return render_template("index.html")
+
 
 @app.route("/schedule", methods=["GET", "POST"])
 def schedule():
@@ -85,7 +91,7 @@ def schedule():
         t1_end = time_add(t1_start, per_subject_block)
         t2_start = t1_end
         t2_end = time_add(t2_start, per_subject_block)
-
+        
         schedule_plan.append({
             "day": d,
             "slots": [
@@ -97,6 +103,7 @@ def schedule():
  
     prompt = f"Make a short study strategy for {days} days, subjects={subjects}, {hours_per_day}h/day, 2 subjects/day."
     summary = ai_complete(prompt)
+
     if request.form.get("download") == "1":
         buf = StringIO()
         buf.write(f"# Study Schedule ({days} days)\n\n")
