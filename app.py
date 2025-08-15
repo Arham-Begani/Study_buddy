@@ -112,3 +112,14 @@ def schedule():
         buf.write("## Strategy\n")
         buf.write(summary + "\n")
         data = buf.getvalue().encode("utf-8")
+        
+        return send_file(
+            io.BytesIO(data),
+            as_attachment=True,
+            download_name="study_schedule.txt",
+            mimetype="text/plain"
+        )
+
+    return render_template("schedule.html", plan=schedule_plan, summary=summary,
+                           hours=hours_per_day, days=days, start_time=start_time,
+                           subjects_text=",".join(subjects))
