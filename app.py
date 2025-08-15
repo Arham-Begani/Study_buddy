@@ -97,3 +97,18 @@ def schedule():
  
     prompt = f"Make a short study strategy for {days} days, subjects={subjects}, {hours_per_day}h/day, 2 subjects/day."
     summary = ai_complete(prompt)
+    if request.form.get("download") == "1":
+        buf = StringIO()
+        buf.write(f"# Study Schedule ({days} days)\n\n")
+        buf.write(f"- Hours/day: **{hours_per_day}** starting **{start_time}**\n")
+        buf.write(f"- Subjects: {', '.join(subjects)}\n\n")
+        
+        for entry in schedule_plan:
+            buf.write(f"## Day {entry['day']}\n")
+            for s in entry["slots"]:
+                buf.write(f"- **{s['subject']}**: {s['start']}–{s['end']}\n")
+            buf.write("\n")
+            
+        buf.write("## Strategy\n")
+        buf.write(summary + "\n")
+        data = buf.getvalue().encode("utf-8")
