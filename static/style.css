@@ -170,3 +170,10 @@ button:hover {
     padding: 8px;
     margin: 6px 0;
 }
+
+.bot {
+    background: #f0f0f0;
+    border-radius: 8px;
+    padding: 8px;
+    margin: 6px 0;
+}
