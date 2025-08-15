@@ -89,3 +89,8 @@ button {
     color: #111;
     font-size: 14px;
 }
+
+textarea {
+    min-height: 96px;
+    resize: vertical;
+}
