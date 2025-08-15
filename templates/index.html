@@ -1,4 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
-
+<section class="card">
+  <h1>AI Study Buddy</h1>
+  <p>generate schedules, ask questions, and build quizzes — works offline, uses AI if available.</p>
+  <div class="grid">
+    <a class="btn" href="{{ url_for('schedule') }}">Make a schedule</a>
+    <a class="btn" href="{{ url_for('chat_page') }}">Ask questions</a>
+    <a class="btn" href="{{ url_for('quiz') }}">Create quizzes</a>
+  </div>
+</section>
 {% endblock %}
