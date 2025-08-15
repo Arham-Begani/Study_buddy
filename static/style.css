@@ -163,3 +163,10 @@ button:hover {
     padding: 10px;
     background: #fafafa;
 }
+
+.you {
+    background: #e6f7ff;
+    border-radius: 8px;
+    padding: 8px;
+    margin: 6px 0;
+}
