@@ -162,3 +162,11 @@ def quiz():
     if USE_GEMINI:
         prompt = f"Create {count} {level} MCQs on {topic}. Return as numbered list with options A–D and the correct answer per question."
         text = ai_complete(prompt)
+        
+    else:
+        
+        text = "\n".join([
+            "1) What is 2+2?\nA) 3  B) 4  C) 5  D) 22\nAnswer: B",
+            "2) Unit of force?\nA) Joule  B) Newton  C) Watt  D) Pascal\nAnswer: B",
+            "3) H2O common name?\nA) Oxygen  B) Hydrogen  C) Water  D) Helium\nAnswer: C",
+        ])
