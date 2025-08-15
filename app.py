@@ -15,3 +15,9 @@ except Exception:
 load_dotenv()
 API_KEY = os.getenv("keys", "").strip()
 USE_GEMINI = bool(API_KEY and genai)
+
+if USE_GEMINI:
+    genai.configure(api_key=API_KEY)
+    GEM_MODEL = genai.GenerativeModel("gemini-1.5-flash")
+
+app = Flask(__name__)
