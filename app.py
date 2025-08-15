@@ -149,3 +149,13 @@ def chat_api():
     prompt = f"Explain in style={style}. Question: {question}"
     reply = ai_complete(prompt)
     return jsonify({"reply": reply})
+
+@app.route("/quiz", methods=["GET", "POST"])
+def quiz():
+    if request.method == "GET":
+        return render_template("quiz.html")
+    
+    topic = request.form.get("topic", "General")
+    count = int(request.form.get("count", "5") or 5)
+    level = request.form.get("level", "easy")
+    
