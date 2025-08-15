@@ -85,3 +85,15 @@ def schedule():
         t1_end = time_add(t1_start, per_subject_block)
         t2_start = t1_end
         t2_end = time_add(t2_start, per_subject_block)
+
+    schedule_plan.append({
+            "day": d,
+            "slots": [
+                {"subject": s1, "start": t1_start, "end": t1_end},
+                {"subject": s2, "start": t2_start, "end": t2_end},
+            ]
+        })
+
+ 
+    prompt = f"Make a short study strategy for {days} days, subjects={subjects}, {hours_per_day}h/day, 2 subjects/day."
+    summary = ai_complete(prompt)
