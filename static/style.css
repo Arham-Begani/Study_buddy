@@ -140,3 +140,10 @@ button:hover {
 .btn:hover {
     background: #f9fafb;
 }
+
+.plan {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 10px;
+    margin-top: 12px;
+}
