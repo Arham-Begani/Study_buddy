@@ -6,7 +6,22 @@
     <label>Topic</label>
     <input name="topic" value="{{ topic or '' }}" placeholder="e.g., Newton's Laws">
 
-    
+    <div class="row">
+      <div>
+        <label>Count</label>
+        <input type="number" name="count" value="{{ count or 5 }}">
+      </div>
+      <div>
+        <label>Level</label>
+        <select name="level">
+          <option {% if level=='easy' %}selected{% endif %}>easy</option>
+          <option {% if level=='medium' %}selected{% endif %}>medium</option>
+          <option {% if level=='hard' %}selected{% endif %}>hard</option>
+        </select>
+      </div>
+    </div>
+    <button type="submit">Generate</button>
+  </form>
 
   {% if generated %}
     <h3>Questions</h3>
