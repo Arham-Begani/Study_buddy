@@ -159,3 +159,6 @@ def quiz():
     count = int(request.form.get("count", "5") or 5)
     level = request.form.get("level", "easy")
     
+    if USE_GEMINI:
+        prompt = f"Create {count} {level} MCQs on {topic}. Return as numbered list with options A–D and the correct answer per question."
+        text = ai_complete(prompt)
