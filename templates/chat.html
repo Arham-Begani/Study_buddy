@@ -13,3 +13,34 @@
   </div>
   <div id="chatlog" class="chatlog"></div>
 </section>
+<script>
+const askBtn = document.getElementById('ask');
+const qEl = document.getElementById('q');
+const styleEl = document.getElementById('style');
+const log = document.getElementById('chatlog');
+
+function addMsg(cls, text){
+  const d = document.createElement('div');
+  d.className = cls;
+  d.textContent = text;
+  log.appendChild(d);
+  log.scrollTop = log.scrollHeight;
+}
+
+askBtn.onclick = async () => {
+  const msg = qEl.value.trim();
+  if(!msg) return;
+  addMsg('you', msg);
+  qEl.value = '';
+  const res = await fetch('/api/chat', {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({message: msg, style: styleEl.value})
+  });
+  const j = await res.json();
+  addMsg('bot', j.reply || 'no reply');
+};
+
+qEl.addEventListener('keydown', e => { if(e.key==='Enter') askBtn.click(); });
+</script>
+{% endblock %}
