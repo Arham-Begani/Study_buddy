@@ -177,3 +177,8 @@ button:hover {
     padding: 8px;
     margin: 6px 0;
 }
+
+.mono {
+    white-space: pre-wrap;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace
+}
