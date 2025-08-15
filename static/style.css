@@ -1,7 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
 :root{
-  --bg:#f4f6f8; --card:#fff; --text:#222; --muted:#6b7280; --accent:#4CAF50; --border:#e5e7eb;
+  --bg:#f4f6f8; 
+  --card:#fff; 
+  --text:#222; 
+  --muted:#6b7280; 
+  --accent:#4CAF50; 
+  --border:#e5e7eb;
 }
 
 *{
@@ -143,7 +148,8 @@ button:hover {
 }
 
 .btn:hover {
-    background: #f9fafb;
+    background: var(--accent);
+    color: #fff;
 }
 
 .plan {
