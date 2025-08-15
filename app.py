@@ -33,7 +33,12 @@ def ai_complete(prompt: str) -> str:
             return f"(AI error: {e})"
     
     
+    if "explain" in prompt.lower():
+        return "explanation (offline): break the topic into definitions, key formulas, and 2–3 solved examples."
     
+    if "quiz" in prompt.lower():
+        return "1) Q: Define inertia. A: Resistance to change in motion.\n2) Q: State Ohm’s law. A: V=IR."
+    return "offline mode: no API key set; add details and try again."
 
 @app.route("/")
 def home():
