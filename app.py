@@ -44,3 +44,18 @@ def ai_complete(prompt: str) -> str:
 def home():
     return render_template("index.html")
 
+@app.route("/schedule", methods=["GET", "POST"])
+def schedule():
+    if request.method == "GET":
+        return render_template("schedule.html")
+    
+    subjects_raw = request.form.get("subjects", "").strip()
+    
+    hours_per_day = float(request.form.get("hours", "3") or 3)
+    
+    days = int(request.form.get("days", "14") or 14)
+    
+    start_time = request.form.get("start_time", "17:00").strip()
+
+    subjects = [s.strip() for s in subjects_raw.split(",") if s.strip()]
+
