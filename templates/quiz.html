@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="card">
+  <h2>Quiz Generator</h2>
+  <form method="post">
+    <label>Topic</label>
+    <input name="topic" value="{{ topic or '' }}" placeholder="e.g., Newton's Laws">
+
+    
+
+  {% if generated %}
+    <h3>Questions</h3>
+    <pre class="mono">{{ generated }}</pre>
+  {% endif %}
+</section>
+{% endblock %}
