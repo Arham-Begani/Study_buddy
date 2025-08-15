@@ -76,3 +76,16 @@ p{
     color:var(--muted);
     margin:0 0 16px 0;
 }
+
+input,
+select,
+textarea,
+button {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #fff;
+    color: #111;
+    font-size: 14px;
+}
