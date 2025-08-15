@@ -56,3 +56,14 @@ main{
     box-shadow:0 6px 18px rgba(0,0,0,.06);
     animation: fadeIn 0.8s ease-in-out;
 }
+
+@keyframes fadeIn { /* This thing is soo goated */
+
+    from {
+         opacity: 0; transform: translateY(20px); 
+    }
+    
+    to {
+         opacity: 1; transform: translateY(0); 
+    }
+}
