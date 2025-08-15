@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="card">
+  <h2>Schedule Generator</h2>
+  <form method="post">
+    <label>Subjects (comma separated)</label>
+    <input name="subjects" value="{{ subjects_text or '' }}" placeholder="Physics, Math, Chemistry, Biology, Social">
+
+    
+
+  {% if plan %}
+    <h3>Plan</h3>
+    <div class="plan">
+      {% for day in plan %}
+        <div class="day">
+          <strong>Day {{ day.day }}</strong>
+          {% for s in day.slots %}
+            <div>• {{ s.subject }} — {{ s.start }}–{{ s.end }}</div>
+          {% endfor %}
+        </div>
+      {% endfor %}
+    </div>
+    <h3>Strategy</h3>
+    <pre class="mono">{{ summary }}</pre>
+  {% endif %}
+</section>
+{% endblock %}
