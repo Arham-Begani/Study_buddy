@@ -47,3 +47,12 @@ main{
     margin:24px auto;
     padding:0 16px;
 }
+
+.card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:20px;
+    box-shadow:0 6px 18px rgba(0,0,0,.06);
+    animation: fadeIn 0.8s ease-in-out;
+}
