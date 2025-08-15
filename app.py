@@ -58,4 +58,30 @@ def schedule():
     start_time = request.form.get("start_time", "17:00").strip()
 
     subjects = [s.strip() for s in subjects_raw.split(",") if s.strip()]
+    if not subjects:
+        subjects = ["Physics", "Math", "Chemistry", "Biology", "Social"]
 
+
+    schedule_plan = []
+    per_subject_block = max(hours_per_day/2, 0.5)
+
+    def time_add(tstr, hrs):
+        
+        h, m = map(int, tstr.split(":"))
+        total = h*60 + m + int(hrs*60)
+        total %= 24*60
+        
+        return f"{total//60:02d}:{total%60:02d}"
+
+    rotation = subjects[:]
+    idx = 0
+    for d in range(1, days+1):
+        s1 = rotation[idx % len(rotation)]
+        s2 = rotation[(idx+1) % len(rotation)]
+        
+        idx += 2
+        
+        t1_start = start_time
+        t1_end = time_add(t1_start, per_subject_block)
+        t2_start = t1_end
+        t2_end = time_add(t2_start, per_subject_block)
