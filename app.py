@@ -163,7 +163,7 @@ def quiz():
     level = request.form.get("level", "easy")
     
     if USE_GEMINI:
-        prompt = f"Create {count} {level} MCQs on {topic}. Return as numbered list with options A–D and the correct answer per question."
+        prompt = f"Create {count} {level} MCQs on {topic}. Return as numbered list with options A–D and the correct answers at the very last."
         text = ai_complete(prompt)
     else:
         text = "\n".join([
