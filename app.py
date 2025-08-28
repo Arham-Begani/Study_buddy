@@ -28,7 +28,9 @@ def clean_markdown(text: str) -> str:
     """Remove bold markdown like **word**."""
     if not text:
         return text
-    return re.sub(r"\*\*(.*?)\*\*", r"\1", text)
+    text = re.sub(r"\*\*(.*?)\*\*", r"\1", text)
+    text = re.sub(r"^##\s*", "", text, flags=re.MULTILINE)
+    return text
 
 
 def ai_complete(prompt: str) -> str:
