@@ -25,7 +25,7 @@ app = Flask(__name__)
 
 
 def clean_markdown(text: str) -> str:
-    """Remove bold markdown like **word**."""
+    """Remove ** and ## """
     if not text:
         return text
     text = re.sub(r"\*\*(.*?)\*\*", r"\1", text)
@@ -34,7 +34,7 @@ def clean_markdown(text: str) -> str:
 
 
 def ai_complete(prompt: str) -> str:
-    """Use Gemini if available, otherwise deterministic offline fallback."""
+    """Use Gemini if available, otherwise deterministic offline fallback"""
     
     if USE_GEMINI:
         try:
@@ -169,7 +169,7 @@ def quiz():
         text = ai_complete(prompt)
     else:
         text = "\n".join([
-            "1) What is 2+2?\nA) 3  B) 4  C) 5  D) 22\nAnswer: B",
+            "1) What is 2+2?\nA) 1  B) 4  C) 5  D) 22\nAnswer: B",
             "2) Unit of force?\nA) Joule  B) Newton  C) Watt  D) Pascal\nAnswer: B",
             "3) H2O common name?\nA) Oxygen  B) Hydrogen  C) Water  D) Helium\nAnswer: C",
         ])
