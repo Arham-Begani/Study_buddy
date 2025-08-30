@@ -1,51 +1,54 @@
 {% extends "base.html" %}
 {% block content %}
-<section class="card">
-  <h2>Ask Questions</h2>
-  <div class="row">
-    <input id="q" placeholder="e.g., explain newton's law with a simple example">
-    <select id="style">
-      <option value="simple">simple</option>
-      <option value="detailed">detailed</option>
-      <option value="exam-focused">exam-focused</option>
-    </select>
-    <button id="ask">Ask</button>
-  </div>
-  <div id="chatlog" class="chatlog">
-    {% for msg in history %}
-      <div class="{{ msg.role }}">{{ msg.text }}</div>
-    {% endfor %}
-  </div>
+<div class="div-container">
+  <section class="card">
+    <h2>Ask Questions</h2>
+    <div class="row">
+      <input id="q" placeholder="e.g., explain newton's law with a simple example">
+      <select id="style">
+        <option value="simple">simple</option>
+        <option value="detailed">detailed</option>
+        <option value="exam-focused">exam-focused</option>
+      </select>
+      <button id="ask">Ask</button>
+    </div>
+    <div id="chatlog" class="chatlog">
+      {% for msg in history %}
+        <div class="{{ msg.role }}">{{ msg.text }}</div>
+      {% endfor %}
+    </div>
 
-</section>
-<script>
-const askBtn = document.getElementById('ask');
-const qEl = document.getElementById('q');
-const styleEl = document.getElementById('style');
-const log = document.getElementById('chatlog');
+  </section>
+  <script>
+  const askBtn = document.getElementById('ask');
+  const qEl = document.getElementById('q');
+  const styleEl = document.getElementById('style');
+  const log = document.getElementById('chatlog');
 
-function addMsg(cls, text){
-  const d = document.createElement('div');
-  d.className = cls;
-  d.textContent = text;
-  log.appendChild(d);
-  log.scrollTop = log.scrollHeight;
-}
+  function addMsg(cls, text){
+    const d = document.createElement('div');
+    d.className = cls;
+    d.textContent = text;
+    log.appendChild(d);
+    log.scrollTop = log.scrollHeight;
+  }
 
-askBtn.onclick = async () => {
-  const msg = qEl.value.trim();
-  if(!msg) return;
-  addMsg('you', msg);
-  qEl.value = '';
-  const res = await fetch('/api/chat', {
-    method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({message: msg, style: styleEl.value})
-  });
-  const j = await res.json();
-  addMsg('bot', j.reply || 'no reply');
-};
+  askBtn.onclick = async () => {
+    const msg = qEl.value.trim();
+    if(!msg) return;
+    addMsg('you', msg);
+    qEl.value = '';
+    const res = await fetch('/api/chat', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({message: msg, style: styleEl.value})
+    });
+    const j = await res.json();
+    addMsg('bot', j.reply || 'no reply');
+  };
 
-qEl.addEventListener('keydown', e => { if(e.key==='Enter') askBtn.click(); });
-</script>
+  qEl.addEventListener('keydown', e => { if(e.key==='Enter') askBtn.click(); });
+  </script>
+</div>
+
 {% endblock %}
