@@ -6,12 +6,12 @@ Check it out: https://study-buddy-test-41in.onrender.com
 
 ## Features
 
-* **Offline-First Functionality:**  Access core features, including study schedule generation and basic quizzing, completely offline.
+* **Amazing Functionality:**  Access core features, including study schedule generation and basic quizzing.
 * **Study Schedule Generator:** Create personalized study plans based on your goals and available time.
 * **AI-Powered Chat Assistant (Online):**  Engage with an AI chat assistant for clarifying concepts, receiving study tips, and generating practice questions (requires online connection).
 * **Interactive Quizzes:** Test your knowledge with customizable quizzes and receive immediate feedback.
 * **Multi-Page Interface:** Intuitive navigation across different sections of the application.
-
+* **Newly Added View count:** A view count which keeps track on how many people used the study_buddy and uses cookies to not get multiple views from one device.
 
 ## Technologies Used
 
@@ -69,4 +69,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 
-For any questions or inquiries, please contact [your email address or contact information].
+For any questions or inquiries, please contact me.
