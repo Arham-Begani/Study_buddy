@@ -23,18 +23,15 @@ if USE_GEMINI:
 
 app = Flask(__name__)
 
-
 def clean_markdown(text: str) -> str:
-    """Remove ** and ## """
+    """Remove bold markdown like **word**."""
     if not text:
         return text
-    text = re.sub(r"\*\*(.*?)\*\*", r"\1", text)
-    text = re.sub(r"^##\s*", "", text, flags=re.MULTILINE)
-    return text
+    return re.sub(r"\*\*(.*?)\*\*", r"\1", text)
 
 
 def ai_complete(prompt: str) -> str:
-    """Use Gemini if available, otherwise deterministic offline fallback"""
+    """Use Gemini if available, otherwise deterministic offline fallback."""
     
     if USE_GEMINI:
         try:
@@ -56,10 +53,28 @@ def ai_complete(prompt: str) -> str:
 def chunk_list(xs, n):
     return [xs[i:i+n] for i in range(0, len(xs), n)]
 
+VIEWS_FILE = "views.txt"
+
+def load_views():
+    try:
+        with open(VIEWS_FILE, "r") as f:
+            return int(f.read().strip())
+    except:
+        return 0
+
+def save_views(count):
+    with open(VIEWS_FILE, "w") as f:
+        f.write(str(count))
+
+site_views = load_views()
+
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+    global site_views
+    site_views += 1
+    save_views(site_views)  
+    return render_template("index.html", views=site_views)
 
 
 @app.route("/schedule", methods=["GET", "POST"])
@@ -164,20 +179,23 @@ def quiz():
     count = int(request.form.get("count", "5") or 5)
     level = request.form.get("level", "easy")
     qtype = request.form.get("qtype", "mcq")
-    
+
     if USE_GEMINI:
         prompt = f"Create {count} {level} {qtype} questions on {topic}. " \
-        f"Return as numbered list with answers at the end."
+                f"Return as numbered list with answers at the end."
         text = ai_complete(prompt)
+
     else:
         text = "\n".join([
-            "1) What is 2+2?\nA) 1  B) 4  C) 5  D) 22\nAnswer: B",
+            "1) What is 2+2?\nA) 3  B) 4  C) 5  D) 22\nAnswer: B",
             "2) Unit of force?\nA) Joule  B) Newton  C) Watt  D) Pascal\nAnswer: B",
             "3) H2O common name?\nA) Oxygen  B) Hydrogen  C) Water  D) Helium\nAnswer: C",
         ])
         
     return render_template("quiz.html", generated=text, topic=topic, count=count, level=level, qtype=qtype)
 
+
+
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", "5000"))
-    app.run(host="0.0.0.0", port=port, debug=True)
+    app.run(host="0.0.0.0", port=port)
