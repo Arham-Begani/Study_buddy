@@ -161,7 +161,7 @@ def schedule():
 
 @app.route("/chat", methods=["GET"])
 def chat_page():
-    return render_template("chat.html")
+    return render_template("chat.html", history=session.get("chat_history", []))
 
 @app.route("/api/chat", methods=["POST"])
 def chat_api():
@@ -172,8 +172,19 @@ def chat_api():
     if not question:
         return jsonify({"reply": "ask a question"}), 400
     
+    if "chat_history" not in session:
+        session["chat_history"] = []
+    
+    session["chat_history"].append({"role": "you", "text": question})
+    
     prompt = f"Explain in style={style}. Question: {question}"
     reply = ai_complete(prompt)
+    
+    session["chat_history"].append({"role": "bot", "text": reply})
+
+    # mark session as modified so Flask saves changes
+    session.modified = True
+    
     return jsonify({"reply": reply})
 
 
@@ -228,4 +239,5 @@ def quiz():
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", "5000"))
-    app.run(host="0.0.0.0", port=port)
+    app.run(host="0.0.0.0", port=port, debug=True)
+
