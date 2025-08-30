@@ -11,7 +11,12 @@
     </select>
     <button id="ask">Ask</button>
   </div>
-  <div id="chatlog" class="chatlog"></div>
+  <div id="chatlog" class="chatlog">
+    {% for msg in history %}
+      <div class="{{ msg.role }}">{{ msg.text }}</div>
+    {% endfor %}
+  </div>
+
 </section>
 <script>
 const askBtn = document.getElementById('ask');

@@ -14,8 +14,8 @@ body.dark {
   --card: #1e1e1e;
   --text: #e5e5e5;
   --muted: #9ca3af;
-  --accent: #4CAF50;
-  --border: #2c2c2c;
+  --accent: #22c55e;
+  --border: #2d2d2d; 
 }
 
 /* Smooth transition for theme switch */
@@ -196,29 +196,53 @@ button:hover {
     padding: 10px;
 }
 
+/* Default Light Mode */
 .chatlog {
-    margin-top: 12px;
-    max-height: 380px;
-    overflow: auto;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 10px;
-    background: #fafafa;
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 10px;
+  background: #f9f9f9;
+  max-height: 400px;
+  overflow-y: auto;
 }
 
-.you {
-    background: #e6f7ff;
-    border-radius: 8px;
-    padding: 8px;
-    margin: 6px 0;
+.chatlog .you {
+  background: #d1f5d3; /* light green */
+  color: #222;
+  padding: 8px 12px;
+  border-radius: 12px;
+  margin: 6px 0;
+  text-align: right;
+  max-width: 75%;
+  margin-left: auto;
 }
 
-.bot {
-    background: #f0f0f0;
-    border-radius: 8px;
-    padding: 8px;
-    margin: 6px 0;
+.chatlog .bot {
+  background: #e8e8e8; /* light gray */
+  color: #111;
+  padding: 8px 12px;
+  border-radius: 12px;
+  margin: 6px 0;
+  text-align: left;
+  max-width: 75%;
+  margin-right: auto;
 }
+
+/* Dark Mode */
+body.dark .chatlog {
+  background: #1e1e1e;
+}
+
+body.dark .chatlog .you {
+  background: #2a2d3a;
+  color: #e0e0e0;
+}
+
+body.dark .chatlog .bot {
+  background: #333333;
+  color: #f5f5f5;
+}
+
 
 .mono {
     white-space: pre-wrap;
