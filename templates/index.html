@@ -8,7 +8,12 @@
     <a class="btn" href="{{ url_for('chat_page') }}">Ask questions</a>
     <a class="btn" href="{{ url_for('quiz') }}">Create quizzes</a>
   </div>
-  <p><strong>Total Site Views:</strong> {{ views }}</p>
+
+
+  <div class="view-counter">
+    Total Site Views: <span>{{ views }}</span>
+  </div>
+
 </section>
 {% endblock %}
 
