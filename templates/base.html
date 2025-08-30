@@ -9,15 +9,40 @@
 </head>
 <body>
 <header>
+  
+
   <nav>
     <a href="{{ url_for('home') }}">Home</a>
     <a href="{{ url_for('schedule') }}">Schedule</a>
     <a href="{{ url_for('chat_page') }}">Chat</a>
     <a href="{{ url_for('quiz') }}">Quiz</a>
+
+    <span id="theme-toggle" style="cursor:pointer;">🌙</span>
   </nav>
 </header>
+
 <main>
   {% block content %}{% endblock %}
 </main>
+
+<script>
+  const toggleIcon = document.getElementById("theme-toggle");
+  const body = document.body;
+
+  // Load saved mode
+  if (localStorage.getItem("theme") === "dark") {
+    body.classList.add("dark");
+    toggleIcon.textContent = "☀️";
+  }
+
+  toggleIcon.addEventListener("click", () => {
+    body.classList.toggle("dark");
+    const isDark = body.classList.contains("dark");
+    toggleIcon.textContent = isDark ? "☀️" : "🌙";
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+  });
+</script>
+
+
 </body>
 </html>

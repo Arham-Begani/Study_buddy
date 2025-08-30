@@ -9,60 +9,92 @@
   --border:#e5e7eb;
 }
 
-*{
-    box-sizing:border-box;
+body.dark {
+  --bg: #121212;
+  --card: #1e1e1e;
+  --text: #e5e5e5;
+  --muted: #9ca3af;
+  --accent: #4CAF50;
+  --border: #2c2c2c;
 }
 
-body{
-    margin:0;
-    background:var(--bg);
-    font-family:Poppins,system-ui,Arial;
-    color:var(--text);
+/* Smooth transition for theme switch */
+* {
+  box-sizing: border-box;
+  transition: background 0.3s ease, color 0.3s ease, border 0.3s ease;
 }
 
-header{
-    background:#fff;
-    border-bottom:1px solid var(--border);
-    position:sticky;
-    top:0;
-    z-index:5;
-}
-nav{
-    max-width:960px;
-    margin:0 auto;
-    display:flex;
-    gap:16px;
-    padding:12px;
+body {
+  margin: 0;
+  background: var(--bg);
+  font-family: Poppins, system-ui, Arial;
+  color: var(--text);
 }
 
-nav a{
-    text-decoration: none;
-    color: #111;
-    padding: 8px 10px;
-    border-radius: 8px;
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
-nav a:hover{
-    background:#f2f2f2;
+header {
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 5;
 }
 
-main{
-    max-width:960px;
-    margin:24px auto;
-    padding:0 16px;
+#theme-toggle {
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
 }
 
-.card{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:12px;
-    padding:20px;
-    box-shadow:0 6px 18px rgba(0,0,0,.06);
-    animation: fadeIn 0.8s ease-in-out;
+#theme-toggle:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+nav {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  gap: 16px;
+  padding: 12px;
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--text);
+  padding: 8px 10px;
+  border-radius: 8px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+nav a:hover {
+  background: rgba(0,0,0,0.05);
+}
+
+body.dark nav a:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+main {
+  max-width: 960px;
+  margin: 24px auto;
+  padding: 0 16px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.06);
+  animation: fadeIn 0.8s ease-in-out;
 }
 
 @keyframes fadeIn { /* This thing is soo goated */
