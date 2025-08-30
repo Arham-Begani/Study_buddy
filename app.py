@@ -4,7 +4,7 @@ import re
 import google.generativeai as genai
 from io import StringIO
 from datetime import datetime
-from flask import Flask, render_template, request, jsonify, send_file
+from flask import Flask, render_template, request, jsonify, send_file, make_response
 from dotenv import load_dotenv
 
 
@@ -62,19 +62,23 @@ def load_views():
     except:
         return 0
 
-def save_views(count):
+def save_views(v):
     with open(VIEWS_FILE, "w") as f:
-        f.write(str(count))
+        f.write(str(v))
 
-site_views = load_views()
-
+views = load_views()
 
 @app.route("/")
 def home():
-    global site_views
-    site_views += 1
-    save_views(site_views)  
-    return render_template("index.html", views=site_views)
+    global views
+    resp = make_response(render_template("index.html", views=views))
+
+    if not request.cookies.get("has_viewed"):
+        views += 1
+        save_views(views)
+        resp.set_cookie("has_viewed", "yes", max_age=60*60*24*7)  # 7 days
+
+    return resp
 
 
 @app.route("/schedule", methods=["GET", "POST"])
