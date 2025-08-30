@@ -9,7 +9,8 @@
     <div class="row">
       <div>
         <label>Count</label>
-        <input type="number" name="count" value="{{ count or 5 }}">
+        <input type="number" name="count" value="{{ count or 5 }}" min="1" max="15">
+        <small style="font-size: 0.85em; color: gray;">Max 15 questions</small>
       </div>
       <div>
         <label>Level</label>
@@ -19,13 +20,24 @@
           <option {% if level=='hard' %}selected{% endif %}>hard</option>
         </select>
       </div>
+      <div>
+        <label>Type</label>
+        <select name="qtype">
+          <option {% if qtype=='mcq' %}selected{% endif %} value="mcq">Multiple Choice</option>
+          <option {% if qtype=='tf' %}selected{% endif %} value="tf">True/False</option>
+          <option {% if qtype=='short' %}selected{% endif %} value="short">Short Answer</option>
+          <option {% if qtype=='mixed' %}selected{% endif %} value="mixed">Mixed</option>
+        </select>
+      </div>
     </div>
     <button type="submit">Generate</button>
   </form>
 
   {% if generated %}
     <h3>Questions</h3>
-    <pre class="mono">{{ generated }}</pre>
+    <pre class="mono" style="font-size: 1rem; line-height: 1.5; font-family: 'Segoe UI', Tahoma, sans-serif;">
+{{ generated }}
+    </pre>
   {% endif %}
 </section>
 {% endblock %}
