@@ -264,3 +264,53 @@ body.dark .chatlog .bot {
   color: #ffd369;
 }
 
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  nav a {
+    text-align: center;
+    flex: 1;
+  }
+  .row {
+    flex-direction: column;
+  }
+  .chatlog {
+    max-height: 300px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+  }
+  .card {
+    padding: 16px;
+  }
+  nav {
+    gap: 8px;
+  }
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+
+@media (min-width: 900px) {
+  .grid-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+
+.quiz-card, .chat-card {
+  display: flex;
+  flex-direction: column;
+}
+
