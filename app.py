@@ -176,8 +176,7 @@ def quiz():
             "3) H2O common name?\nA) Oxygen  B) Hydrogen  C) Water  D) Helium\nAnswer: C",
         ])
         
-    return render_template("quiz.html", generated=text, topic=topic, count=count, level=level)
-
+    return render_template("quiz.html", generated=text, topic=topic, count=count, level=level, qtype=qtype)
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", "5000"))
