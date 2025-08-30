@@ -4,9 +4,12 @@ import re
 import google.generativeai as genai
 from io import StringIO
 from datetime import datetime
-from flask import Flask, render_template, request, jsonify, send_file, make_response
+from flask import Flask, render_template, request, jsonify, send_file, make_response, session
 from dotenv import load_dotenv
 
+app = Flask(__name__)
+
+app.secret_key = "yoursecretkey" 
 
 try:
     import google.generativeai as genai
@@ -21,7 +24,7 @@ if USE_GEMINI:
     genai.configure(api_key=API_KEY)
     GEM_MODEL = genai.GenerativeModel("gemini-1.5-flash")
 
-app = Flask(__name__)
+
 
 def clean_markdown(text: str) -> str:
     """Remove bold markdown like **word**."""
@@ -176,27 +179,50 @@ def chat_api():
 
 @app.route("/quiz", methods=["GET", "POST"])
 def quiz():
-    if request.method == "GET":
-        return render_template("quiz.html")
-    
-    topic = request.form.get("topic", "General")
-    count = int(request.form.get("count", "5") or 5)
-    level = request.form.get("level", "easy")
-    qtype = request.form.get("qtype", "mcq")
+    if request.method == "POST":
+        topic = request.form.get("topic", "General")
+        count = int(request.form.get("count", "5") or 5)
+        level = request.form.get("level", "easy")
+        qtype = request.form.get("qtype", "mcq")
 
-    if USE_GEMINI:
-        prompt = f"Create {count} {level} {qtype} questions on {topic}. " \
-                f"Return as numbered list with answers at the end."
-        text = ai_complete(prompt)
-
-    else:
-        text = "\n".join([
-            "1) What is 2+2?\nA) 3  B) 4  C) 5  D) 22\nAnswer: B",
-            "2) Unit of force?\nA) Joule  B) Newton  C) Watt  D) Pascal\nAnswer: B",
-            "3) H2O common name?\nA) Oxygen  B) Hydrogen  C) Water  D) Helium\nAnswer: C",
-        ])
+        if USE_GEMINI:
+            prompt = f"Create {count} {level} {qtype} questions on {topic}. " \
+                     f"Return as numbered list with answers at the end."
+            text = ai_complete(prompt)
+        else:
+            text = "\n".join([
+                "1) What is 2+2?\nA) 3  B) 4  C) 5  D) 22\nAnswer: B",
+                "2) Unit of force?\nA) Joule  B) Newton  C) Watt  D) Pascal\nAnswer: B",
+                "3) H2O common name?\nA) Oxygen  B) Hydrogen  C) Water  D) Helium\nAnswer: C",
+            ])
         
-    return render_template("quiz.html", generated=text, topic=topic, count=count, level=level, qtype=qtype)
+        # save quiz in session
+        session["last_quiz"] = {
+            "text": text,
+            "topic": topic,
+            "count": count,
+            "level": level,
+            "qtype": qtype
+        }
+
+        return render_template("quiz.html", 
+                               generated=text, 
+                               topic=topic, 
+                               count=count, 
+                               level=level, 
+                               qtype=qtype)
+
+    # For GET requests (like returning to the page)
+    saved_quiz = session.get("last_quiz")
+    if saved_quiz:
+        return render_template("quiz.html", 
+                               generated=saved_quiz["text"], 
+                               topic=saved_quiz["topic"], 
+                               count=saved_quiz["count"], 
+                               level=saved_quiz["level"], 
+                               qtype=saved_quiz["qtype"])
+    else:
+        return render_template("quiz.html")
 
 
 
