@@ -11,6 +11,7 @@
         <option value="exam-focused">exam-focused</option>
       </select>
       <button id="ask">Ask</button>
+      <button id="clearChat">Clear</button>
     </div>
     <div id="chatlog" class="chatlog">
       {% for msg in history %}
@@ -48,6 +49,17 @@
   };
 
   qEl.addEventListener('keydown', e => { if(e.key==='Enter') askBtn.click(); });
+
+  const clearBtn = document.getElementById('clearChat');
+
+  clearBtn.onclick = async () => {
+    log.innerHTML = '';
+    sessionStorage.removeItem("chatlog");
+
+    // Clear server session too
+    await fetch('/api/clear_chat', { method: 'POST' });
+  };
+
   </script>
 </div>
 
