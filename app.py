@@ -182,10 +182,15 @@ def chat_api():
     
     session["chat_history"].append({"role": "bot", "text": reply})
 
-    # mark session as modified so Flask saves changes
+    
     session.modified = True
     
     return jsonify({"reply": reply})
+
+@app.route("/api/clear_chat", methods=["POST"])
+def clear_chat():
+    session.pop("chat_history", None)  # remove stored chat history
+    return jsonify({"status": "cleared"})
 
 
 @app.route("/quiz", methods=["GET", "POST"])
