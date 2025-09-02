@@ -3,16 +3,23 @@
 <div class="div-container">
   <section class="card">
     <h2>Ask Questions</h2>
+
     <div class="row">
       <input id="q" placeholder="e.g., explain newton's law with a simple example">
-      <select id="style">
-        <option value="simple">simple</option>
-        <option value="detailed">detailed</option>
-        <option value="exam-focused">exam-focused</option>
-      </select>
-      <button id="ask">Ask</button>
-      <button id="clearChat">Clear</button>
+
+      <div class="chat-controls">
+        <select id="style">
+          <option value="simple">simple</option>
+          <option value="detailed">detailed</option>
+          <option value="exam-focused">exam-focused</option>
+        </select>
+
+        <button id="ask">Ask</button>
+        <button id="clearChat">Clear</button>
+      </div>
+      
     </div>
+
     <div id="chatlog" class="chatlog">
       {% for msg in history %}
         <div class="{{ msg.role }}">{{ msg.text }}</div>
