@@ -97,6 +97,20 @@ main {
   animation: fadeIn 0.8s ease-in-out;
 }
 
+.download-btn {
+  display:inline-block;
+  margin-top:12px;
+  padding:8px 14px;
+  background:var(--accent);
+  color:#fff;
+  border-radius:8px;
+  text-decoration:none;
+  font-weight:500;
+}
+.download-btn:hover {
+  background:#3e9c45;
+}
+
 @keyframes fadeIn { /* This thing is soo goated */
 
     from {
