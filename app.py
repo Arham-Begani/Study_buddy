@@ -227,8 +227,8 @@ def quiz():
                                count=count, 
                                level=level, 
                                qtype=qtype)
+    
 
-    # For GET requests (like returning to the page)
     saved_quiz = session.get("last_quiz")
     if saved_quiz:
         return render_template("quiz.html", 
@@ -239,6 +239,23 @@ def quiz():
                                qtype=saved_quiz["qtype"])
     else:
         return render_template("quiz.html")
+
+
+@app.route("/download_quiz")
+def download_quiz():
+    saved_quiz = session.get("last_quiz")
+    quiz_data = saved_quiz["text"] if saved_quiz else "No quiz generated yet."
+
+    buffer = io.BytesIO()
+    buffer.write(quiz_data.encode("utf-8"))
+    buffer.seek(0)
+
+    return send_file(
+        buffer,
+        as_attachment=True,
+        download_name="quiz.txt",
+        mimetype="text/plain"
+    )
 
 
 
