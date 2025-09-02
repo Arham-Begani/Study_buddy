@@ -212,7 +212,8 @@ def quiz():
                 "3) H2O common name?\nA) Oxygen  B) Hydrogen  C) Water  D) Helium\nAnswer: C",
             ])
         
-        # save quiz in session
+        # Save quiz in session
+        session["quiz_data"] = text
         session["last_quiz"] = {
             "text": text,
             "topic": topic,
@@ -221,30 +222,35 @@ def quiz():
             "qtype": qtype
         }
 
-        return render_template("quiz.html", 
-                               generated=text, 
-                               topic=topic, 
-                               count=count, 
-                               level=level, 
-                               qtype=qtype)
-    
+        return render_template(
+            "quiz.html",
+            generated=text,
+            topic=topic,
+            count=count,
+            level=level,
+            qtype=qtype
+        )
 
     saved_quiz = session.get("last_quiz")
     if saved_quiz:
-        return render_template("quiz.html", 
-                               generated=saved_quiz["text"], 
-                               topic=saved_quiz["topic"], 
-                               count=saved_quiz["count"], 
-                               level=saved_quiz["level"], 
-                               qtype=saved_quiz["qtype"])
+        return render_template(
+            "quiz.html",
+            generated=saved_quiz["text"],
+            topic=saved_quiz["topic"],
+            count=saved_quiz["count"],
+            level=saved_quiz["level"],
+            qtype=saved_quiz["qtype"]
+        )
     else:
         return render_template("quiz.html")
 
 
 @app.route("/download_quiz")
 def download_quiz():
-    saved_quiz = session.get("last_quiz")
-    quiz_data = saved_quiz["text"] if saved_quiz else "No quiz generated yet."
+    quiz_data = session.get("quiz_data", "")
+
+    if not quiz_data:
+        quiz_data = "No quiz generated yet."
 
     buffer = io.BytesIO()
     buffer.write(quiz_data.encode("utf-8"))
@@ -256,6 +262,7 @@ def download_quiz():
         download_name="quiz.txt",
         mimetype="text/plain"
     )
+
 
 
 
