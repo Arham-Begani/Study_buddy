@@ -18,6 +18,7 @@ body.dark {
   --border: #2d2d2d; 
 }
 
+
 /* Smooth transition for theme switch */
 * {
   box-sizing: border-box;
