@@ -199,10 +199,10 @@ def quiz():
         topic = request.form.get("topic", "General")
         count = int(request.form.get("count", "5") or 5)
         level = request.form.get("level", "easy")
-        qtype = request.form.get("qtype", "mcq")
+        qtype = request.form.get("qtype", "mixed")
 
         if USE_GEMINI:
-            prompt = f"Create {count} {level} {qtype} questions on {topic}.If possible take from ncert textbooks and curriculum materials" \
+            prompt = f"Create {count} {level} {qtype} questions on {topic}.Take from ncert textbooks and curriculum materials" \
                      f"Return as numbered list with answers at the end."
             text = ai_complete(prompt)
         else:
