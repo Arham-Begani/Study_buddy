@@ -90,11 +90,15 @@ def schedule():
         return render_template("schedule.html")
     
     subjects_raw = request.form.get("subjects", "").strip()
+    
     hours_per_day = float(request.form.get("hours", "3") or 3)
+    
     days = int(request.form.get("days", "14") or 14)
+    
     start_time = request.form.get("start_time", "17:00").strip()
 
     subjects = [s.strip() for s in subjects_raw.split(",") if s.strip()]
+    
     if not subjects:
         subjects = ["Physics", "Math", "Chemistry", "Biology", "Social"]
 
