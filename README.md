@@ -2,6 +2,8 @@
 
 **AI Study Buddy** is a multi-page Flask application designed to assist students in planning, learning, and assessing their understanding of study material.  This offline-first application prioritizes accessibility, allowing users to utilize core features even without an internet connection.  When online, the app leverages the power of the Gemini API (or a similar AI API) to enhance its capabilities and provide more intelligent assistance.
 
+Check it out! : https://study-buddy-test-41in.onrender.com/
+
 ## Features
 
 * **Amazing Functionality:**  Access core features, including study schedule generation and basic quizzing.
